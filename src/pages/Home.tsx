@@ -66,11 +66,11 @@ const Home = () => {
       keywords="telehealth software, telemedicine platform, virtual healthcare, HIPAA compliant, patient care technology"
     >
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero py-20 lg:py-32">
+      <section className="relative overflow-hidden bg-gradient-hero py-20 lg:py-28">
         <div className="container mx-auto px-4">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="animate-fade-in space-y-8">
-              <h1 className="text-4xl font-bold leading-tight text-foreground lg:text-6xl">
+            <div className="space-y-6 animate-fade-in">
+              <h1 className="text-4xl font-bold leading-tight text-foreground lg:text-5xl xl:text-6xl">
                 Transform Healthcare with{" "}
                 <span className="bg-gradient-primary bg-clip-text text-transparent">
                   Modern Telehealth
@@ -82,17 +82,17 @@ const Home = () => {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link to="/contact">
-                  <Button variant="hero" size="lg" className="w-full sm:w-auto">
+                  <Button variant="hero" size="lg" className="w-full sm:w-auto text-base">
                     Request a Demo
                   </Button>
                 </Link>
                 <Link to="/partner">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-base">
                     Become a Partner
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-8 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-accent" />
                   <span>HIPAA Compliant</span>
@@ -119,9 +119,9 @@ const Home = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="border-y border-border bg-muted/30 py-12">
+      <section className="border-y border-border bg-background py-8">
         <div className="container mx-auto px-4">
-          <p className="text-center text-lg font-medium text-muted-foreground">
+          <p className="text-center text-base font-medium text-muted-foreground">
             Trusted by thousands of healthcare providers nationwide
           </p>
         </div>
@@ -138,17 +138,17 @@ const Home = () => {
               Everything you need to deliver world-class virtual care
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <Card key={index} className="border-2 transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <Card key={index} className="group border-2 transition-all duration-300 hover:border-primary hover:shadow-lg">
                   <CardContent className="p-6">
-                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                      <Icon className="h-6 w-6 text-primary" />
+                    <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary/20">
+                      <Icon className="h-7 w-7 text-primary" />
                     </div>
                     <h3 className="mb-2 text-xl font-semibold">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
+                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -164,8 +164,11 @@ const Home = () => {
             <h2 className="mb-4 text-3xl font-bold text-foreground lg:text-4xl">
               Powerful Features for Modern Healthcare
             </h2>
+            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+              Advanced technology designed for healthcare professionals
+            </p>
           </div>
-          <div className="space-y-20">
+          <div className="space-y-24">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const isEven = index % 2 === 0;
@@ -174,12 +177,12 @@ const Home = () => {
                   key={index} 
                   className={`grid items-center gap-12 lg:grid-cols-2 ${!isEven && "lg:grid-flow-dense"}`}
                 >
-                  <div className={`space-y-4 ${!isEven && "lg:col-start-2"}`}>
+                  <div className={`space-y-6 ${!isEven && "lg:col-start-2"}`}>
                     <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
                       <Icon className="h-8 w-8 text-primary" />
                     </div>
                     <h3 className="text-2xl font-bold lg:text-3xl">{feature.title}</h3>
-                    <p className="text-lg text-muted-foreground">{feature.description}</p>
+                    <p className="text-base text-muted-foreground leading-relaxed">{feature.description}</p>
                   </div>
                   <div className={!isEven ? "lg:col-start-1 lg:row-start-1" : ""}>
                     <img 
@@ -196,7 +199,7 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20">
+      <section className="bg-muted/30 py-20">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground lg:text-4xl">
@@ -206,17 +209,37 @@ const Home = () => {
               From consultation to treating patients in days, not months
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          
+          {/* Desktop Steps with Connecting Lines */}
+          <div className="hidden lg:block">
+            <div className="relative mx-auto max-w-5xl">
+              {/* Connecting Line */}
+              <div className="absolute left-0 right-0 top-12 h-1 bg-gradient-to-r from-primary via-primary to-primary" 
+                   style={{ width: 'calc(100% - 12rem)', marginLeft: '6rem' }} />
+              
+              <div className="relative grid grid-cols-4 gap-8">
+                {steps.map((step, index) => (
+                  <div key={index} className="relative text-center">
+                    <div className="relative z-10 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary text-3xl font-bold text-primary-foreground shadow-lg ring-4 ring-background">
+                      {step.number}
+                    </div>
+                    <h3 className="mb-3 text-xl font-semibold">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile/Tablet Steps */}
+          <div className="grid gap-8 lg:hidden md:grid-cols-2">
             {steps.map((step, index) => (
-              <div key={index} className="relative">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-primary text-2xl font-bold text-primary-foreground shadow-lg">
+              <div key={index} className="text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground shadow-lg">
                   {step.number}
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
                 <p className="text-muted-foreground">{step.description}</p>
-                {index < steps.length - 1 && (
-                  <div className="absolute right-0 top-8 hidden h-0.5 w-full bg-gradient-to-r from-primary to-transparent lg:block" />
-                )}
               </div>
             ))}
           </div>
@@ -226,20 +249,24 @@ const Home = () => {
       {/* Final CTA Section */}
       <section className="bg-gradient-primary py-20 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
+          <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
             Ready to Transform Your Practice?
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg opacity-90">
+          <p className="mx-auto mb-10 max-w-2xl text-lg opacity-95">
             Join thousands of healthcare providers delivering exceptional care with RingVisit. 
             Schedule your personalized demo today.
           </p>
           <Link to="/contact">
-            <Button variant="outline" size="lg" className="bg-background text-primary hover:bg-background/90">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-white bg-white text-primary hover:bg-white/90 text-base font-semibold"
+            >
               Schedule Your Demo Now
             </Button>
           </Link>
-          <div className="mt-8 text-sm opacity-80">
-            <Shield className="mx-auto mb-2 h-6 w-6" />
+          <div className="mt-10 flex items-center justify-center gap-2 text-sm opacity-90">
+            <Shield className="h-5 w-5" />
             <p>Secure & Confidential | HIPAA Compliant | Enterprise-Grade Security</p>
           </div>
         </div>
