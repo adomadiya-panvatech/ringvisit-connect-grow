@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "@/assets/ringvisit-logo.png";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,11 +20,12 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 transition-opacity hover:opacity-80">
-          <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-primary"></div>
-            <span className="text-2xl font-bold text-primary">RingVisit</span>
-          </div>
+        <Link to="/" className="flex items-center transition-opacity hover:opacity-80">
+          <img 
+            src={logo} 
+            alt="RingVisit - Telehealth Solutions" 
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}

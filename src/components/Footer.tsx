@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/ringvisit-logo.png";
 
 const Footer = () => {
   return (
@@ -8,10 +9,13 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary"></div>
-              <span className="text-xl font-bold text-primary">RingVisit</span>
-            </div>
+            <Link to="/" className="inline-block">
+              <img 
+                src={logo} 
+                alt="RingVisit - Telehealth Solutions" 
+                className="h-10 w-auto"
+              />
+            </Link>
             <p className="text-sm text-muted-foreground">
               Modern telehealth solutions for healthcare providers
             </p>
