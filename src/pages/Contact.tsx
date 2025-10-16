@@ -11,10 +11,11 @@ import { Mail, Phone, MapPin, Clock, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  fullName: z.string().trim().min(1, "Full name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   phone: z.string().trim().min(10, "Valid phone number is required").max(20, "Phone number too long"),
   company: z.string().trim().max(200, "Company name too long").optional(),
+  serviceInterest: z.string().trim().min(1, "Service interest is required").max(500, "Service interest must be less than 500 characters"),
   message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
 });
 
@@ -37,10 +38,11 @@ const Contact = () => {
       form_type: "contact",
       timestamp: new Date().toISOString(),
       user_data: {
-        name: data.name,
+        name: data.fullName,
         email: data.email,
         phone: data.phone,
         company: data.company || "",
+        service_interest: data.serviceInterest,
         message: data.message,
       },
       metadata: {
@@ -102,20 +104,23 @@ const Contact = () => {
             {/* Contact Form */}
             <Card className="border-2 shadow-lg">
               <CardContent className="p-8">
-                <h2 className="mb-6 text-2xl font-bold">Send Us a Message</h2>
+                <h2 className="mb-2 text-2xl font-bold">Send Us a Message</h2>
+                <p className="mb-6 text-muted-foreground">
+                  Fill out the form below and we'll get back to you within 24 hours
+                </p>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="fullName" className="mb-2 block text-sm font-medium">
                       Full Name *
                     </label>
                     <Input
-                      id="name"
-                      {...register("name")}
-                      placeholder="Dr. John Smith"
-                      className={errors.name ? "border-destructive" : ""}
+                      id="fullName"
+                      {...register("fullName")}
+                      placeholder="John Doe"
+                      className={errors.fullName ? "border-destructive" : ""}
                     />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-destructive">{errors.name.message}</p>
+                    {errors.fullName && (
+                      <p className="mt-1 text-sm text-destructive">{errors.fullName.message}</p>
                     )}
                   </div>
 
@@ -127,7 +132,7 @@ const Contact = () => {
                       id="email"
                       type="email"
                       {...register("email")}
-                      placeholder="john.smith@practice.com"
+                      placeholder="john@example.com"
                       className={errors.email ? "border-destructive" : ""}
                     />
                     {errors.email && (
@@ -158,18 +163,33 @@ const Contact = () => {
                     <Input
                       id="company"
                       {...register("company")}
-                      placeholder="ABC Medical Group"
+                      placeholder="Your Company (Optional)"
                     />
                   </div>
 
                   <div>
+                    <label htmlFor="serviceInterest" className="mb-2 block text-sm font-medium">
+                      Service Interest *
+                    </label>
+                    <Input
+                      id="serviceInterest"
+                      {...register("serviceInterest")}
+                      placeholder="e.g., Healthcare IT Solutions, Telemedicine, etc."
+                      className={errors.serviceInterest ? "border-destructive" : ""}
+                    />
+                    {errors.serviceInterest && (
+                      <p className="mt-1 text-sm text-destructive">{errors.serviceInterest.message}</p>
+                    )}
+                  </div>
+
+                  <div>
                     <label htmlFor="message" className="mb-2 block text-sm font-medium">
-                      Message *
+                      Message/Comments *
                     </label>
                     <Textarea
                       id="message"
                       {...register("message")}
-                      placeholder="Tell us about your practice and how we can help..."
+                      placeholder="Tell us how we can help you..."
                       rows={5}
                       className={errors.message ? "border-destructive" : ""}
                     />
