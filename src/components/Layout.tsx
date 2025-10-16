@@ -1,7 +1,5 @@
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet";
-import Header from "./Header";
-import Footer from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -28,12 +26,7 @@ const Layout = ({ children, title, description, keywords }: LayoutProps) => {
         <meta name="twitter:title" content={title || defaultTitle} />
         <meta name="twitter:description" content={description || defaultDescription} />
       </Helmet>
-      
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </div>
+      {children}
     </>
   );
 };
