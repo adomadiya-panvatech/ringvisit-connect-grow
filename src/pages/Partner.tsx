@@ -12,14 +12,14 @@ import { Handshake, TrendingUp, Award, Users, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const partnerSchema = z.object({
-  companyName: z.string().trim().min(1, "Company name is required").max(200),
-  contactName: z.string().trim().min(1, "Contact name is required").max(100),
+  organizationName: z.string().trim().min(1, "Organization name is required").max(200),
+  yourName: z.string().trim().min(1, "Your name is required").max(100),
+  titleRole: z.string().trim().min(1, "Title/Role is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
   phone: z.string().trim().min(10, "Valid phone number is required").max(20),
-  website: z.string().trim().url("Invalid URL").max(500).optional().or(z.literal("")),
-  partnershipType: z.string().min(1, "Please select a partnership type"),
-  expectedVolume: z.string().optional(),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000),
+  organizationType: z.string().min(1, "Please select an organization type"),
+  potentialUsers: z.string().min(1, "Please select potential users range"),
+  partnershipInterest: z.string().trim().min(10, "Partnership interest must be at least 10 characters").max(1000),
 });
 
 type PartnerFormData = z.infer<typeof partnerSchema>;
@@ -40,14 +40,14 @@ const Partner = () => {
       form_type: "partner_inquiry",
       timestamp: new Date().toISOString(),
       user_data: {
-        name: data.contactName,
+        name: data.yourName,
         email: data.email,
         phone: data.phone,
-        company: data.companyName,
-        message: data.message,
-        partnership_type: data.partnershipType,
-        website: data.website || "",
-        expected_volume: data.expectedVolume || "",
+        company: data.organizationName,
+        title_role: data.titleRole,
+        organization_type: data.organizationType,
+        potential_users: data.potentialUsers,
+        message: data.partnershipInterest,
       },
       metadata: {
         user_agent: navigator.userAgent,
@@ -220,43 +220,58 @@ const Partner = () => {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl">
             <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold">Apply for Partnership</h2>
+              <h2 className="mb-4 text-3xl font-bold">Become a Partner</h2>
               <p className="text-lg text-muted-foreground">
-                Fill out the form below and our partnership team will be in touch shortly.
+                Fill out the form below and our partnerships team will reach out
               </p>
             </div>
 
             <Card className="border-2 shadow-lg">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  <div>
+                    <label htmlFor="organizationName" className="mb-2 block text-sm font-medium">
+                      Organization Name *
+                    </label>
+                    <Input
+                      id="organizationName"
+                      {...register("organizationName")}
+                      placeholder="Your Organization"
+                      className={errors.organizationName ? "border-destructive" : ""}
+                    />
+                    {errors.organizationName && (
+                      <p className="mt-1 text-sm text-destructive">{errors.organizationName.message}</p>
+                    )}
+                  </div>
+
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="companyName" className="mb-2 block text-sm font-medium">
-                        Company Name *
+                      <label htmlFor="yourName" className="mb-2 block text-sm font-medium">
+                        Your Name *
                       </label>
                       <Input
-                        id="companyName"
-                        {...register("companyName")}
-                        placeholder="ABC Healthcare Solutions"
-                        className={errors.companyName ? "border-destructive" : ""}
+                        id="yourName"
+                        {...register("yourName")}
+                        placeholder="John Doe"
+                        className={errors.yourName ? "border-destructive" : ""}
                       />
-                      {errors.companyName && (
-                        <p className="mt-1 text-sm text-destructive">{errors.companyName.message}</p>
+                      {errors.yourName && (
+                        <p className="mt-1 text-sm text-destructive">{errors.yourName.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="contactName" className="mb-2 block text-sm font-medium">
-                        Contact Name *
+                      <label htmlFor="titleRole" className="mb-2 block text-sm font-medium">
+                        Title/Role *
                       </label>
                       <Input
-                        id="contactName"
-                        {...register("contactName")}
-                        placeholder="John Smith"
-                        className={errors.contactName ? "border-destructive" : ""}
+                        id="titleRole"
+                        {...register("titleRole")}
+                        placeholder="Chief Medical Officer"
+                        className={errors.titleRole ? "border-destructive" : ""}
                       />
-                      {errors.contactName && (
-                        <p className="mt-1 text-sm text-destructive">{errors.contactName.message}</p>
+                      {errors.titleRole && (
+                        <p className="mt-1 text-sm text-destructive">{errors.titleRole.message}</p>
                       )}
                     </div>
                   </div>
@@ -270,7 +285,7 @@ const Partner = () => {
                         id="email"
                         type="email"
                         {...register("email")}
-                        placeholder="john@company.com"
+                        placeholder="john@example.com"
                         className={errors.email ? "border-destructive" : ""}
                       />
                       {errors.email && (
@@ -295,68 +310,65 @@ const Partner = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="website" className="mb-2 block text-sm font-medium">
-                      Company Website
-                    </label>
-                    <Input
-                      id="website"
-                      type="url"
-                      {...register("website")}
-                      placeholder="https://www.yourcompany.com"
-                      className={errors.website ? "border-destructive" : ""}
-                    />
-                    {errors.website && (
-                      <p className="mt-1 text-sm text-destructive">{errors.website.message}</p>
-                    )}
-                  </div>
-
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="partnershipType" className="mb-2 block text-sm font-medium">
-                        Partnership Interest *
+                      <label htmlFor="organizationType" className="mb-2 block text-sm font-medium">
+                        Organization Type *
                       </label>
-                      <Select onValueChange={(value) => setValue("partnershipType", value)}>
-                        <SelectTrigger className={errors.partnershipType ? "border-destructive" : ""}>
-                          <SelectValue placeholder="Select partnership type" />
+                      <Select onValueChange={(value) => setValue("organizationType", value)}>
+                        <SelectTrigger className={errors.organizationType ? "border-destructive" : ""}>
+                          <SelectValue placeholder="Select type" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="reseller">Reseller Partner</SelectItem>
-                          <SelectItem value="affiliate">Affiliate Partner</SelectItem>
-                          <SelectItem value="integration">Integration Partner</SelectItem>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="hospital">Hospital</SelectItem>
+                          <SelectItem value="clinic">Clinic</SelectItem>
+                          <SelectItem value="private_practice">Private Practice</SelectItem>
+                          <SelectItem value="urgent_care">Urgent Care</SelectItem>
+                          <SelectItem value="health_system">Health System</SelectItem>
+                          <SelectItem value="reseller">Technology Reseller</SelectItem>
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
-                      {errors.partnershipType && (
-                        <p className="mt-1 text-sm text-destructive">{errors.partnershipType.message}</p>
+                      {errors.organizationType && (
+                        <p className="mt-1 text-sm text-destructive">{errors.organizationType.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="expectedVolume" className="mb-2 block text-sm font-medium">
-                        Expected Monthly Volume
+                      <label htmlFor="potentialUsers" className="mb-2 block text-sm font-medium">
+                        Potential Users *
                       </label>
-                      <Input
-                        id="expectedVolume"
-                        {...register("expectedVolume")}
-                        placeholder="e.g., 10-20 clients"
-                      />
+                      <Select onValueChange={(value) => setValue("potentialUsers", value)}>
+                        <SelectTrigger className={errors.potentialUsers ? "border-destructive" : ""}>
+                          <SelectValue placeholder="Select range" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="1-10">1-10 users</SelectItem>
+                          <SelectItem value="11-50">11-50 users</SelectItem>
+                          <SelectItem value="51-100">51-100 users</SelectItem>
+                          <SelectItem value="101-500">101-500 users</SelectItem>
+                          <SelectItem value="501+">501+ users</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {errors.potentialUsers && (
+                        <p className="mt-1 text-sm text-destructive">{errors.potentialUsers.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-medium">
-                      Additional Information *
+                    <label htmlFor="partnershipInterest" className="mb-2 block text-sm font-medium">
+                      Partnership Interest *
                     </label>
                     <Textarea
-                      id="message"
-                      {...register("message")}
-                      placeholder="Tell us about your business and why you'd like to partner with RingVisit..."
+                      id="partnershipInterest"
+                      {...register("partnershipInterest")}
+                      placeholder="Tell us about your partnership interests..."
                       rows={5}
-                      className={errors.message ? "border-destructive" : ""}
+                      className={errors.partnershipInterest ? "border-destructive" : ""}
                     />
-                    {errors.message && (
-                      <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>
+                    {errors.partnershipInterest && (
+                      <p className="mt-1 text-sm text-destructive">{errors.partnershipInterest.message}</p>
                     )}
                   </div>
 
