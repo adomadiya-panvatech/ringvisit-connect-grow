@@ -55,7 +55,17 @@ const Partner = () => {
       },
     };
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // API calling commented out
+    // try {
+    //   const response = await fetch(CONFIG.WEBHOOKS.PARTNER_FORM, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(submissionData),
+    //   });
+    //   if (!response.ok) throw new Error('Submission failed');
+    // } catch (error) {
+    //   console.error('API Error:', error);
+    // }
     
     console.log("Partner inquiry data:", submissionData);
     
