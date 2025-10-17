@@ -51,8 +51,17 @@ const Contact = () => {
       },
     };
 
-    // Simulate API call (replace with actual backend integration)
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // API calling commented out
+    // try {
+    //   const response = await fetch(CONFIG.WEBHOOKS.CONTACT_FORM, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(submissionData),
+    //   });
+    //   if (!response.ok) throw new Error('Submission failed');
+    // } catch (error) {
+    //   console.error('API Error:', error);
+    // }
     
     console.log("Form submission data:", submissionData);
     
