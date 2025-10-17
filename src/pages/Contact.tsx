@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { Mail, Phone, MapPin, Clock, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { CONFIG } from "@/lib/config";
 
 const contactSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(100, "Name must be less than 100 characters"),
@@ -31,39 +32,54 @@ const Contact = () => {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     
-    // Prepare data for backend
-    const submissionData = {
-      submission_id: crypto.randomUUID(),
-      website_source: "RingVisit",
-      form_type: "contact",
+    // Split name into first and last
+    const nameParts = data.fullName.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    
+    // Prepare webhook payload for n8n
+    const webhookPayload = {
+      formType: "Contact",
       timestamp: new Date().toISOString(),
-      user_data: {
+      source: "RingVisit",
+      data: {
         name: data.fullName,
+        firstName: firstName,
+        lastName: lastName,
         email: data.email,
         phone: data.phone,
         company: data.company || "",
-        service_interest: data.serviceInterest,
+        serviceInterest: data.serviceInterest,
         message: data.message,
-      },
-      metadata: {
-        user_agent: navigator.userAgent,
-        referrer: document.referrer,
-      },
+        source: "OneTriage Marketing Website"
+      }
     };
 
-    // API calling commented out
+    // Send to n8n webhook
+    try {
+      const webhookResponse = await fetch(CONFIG.WEBHOOKS.CONTACT_FORM, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload),
+      });
+      console.log("Webhook response:", webhookResponse.status);
+    } catch (error) {
+      console.error('Webhook error (non-blocking):', error);
+    }
+
+    // API endpoint call commented out
     // try {
-    //   const response = await fetch(CONFIG.WEBHOOKS.CONTACT_FORM, {
+    //   const apiResponse = await fetch(CONFIG.API_ENDPOINTS.CONTACT_SUBMIT, {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
     //     body: JSON.stringify(submissionData),
     //   });
-    //   if (!response.ok) throw new Error('Submission failed');
+    //   if (!apiResponse.ok) throw new Error('API submission failed');
     // } catch (error) {
     //   console.error('API Error:', error);
     // }
     
-    console.log("Form submission data:", submissionData);
+    console.log("Form submission data:", webhookPayload);
     
     toast.success("Thank you! We'll get back to you within 24 hours.", {
       description: "Check your email for confirmation.",

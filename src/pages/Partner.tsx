@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { Handshake, TrendingUp, Award, Users, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { CONFIG } from "@/lib/config";
 
 const partnerSchema = z.object({
   organizationName: z.string().trim().min(1, "Organization name is required").max(200),
@@ -34,40 +35,56 @@ const Partner = () => {
   const onSubmit = async (data: PartnerFormData) => {
     setIsSubmitting(true);
     
-    const submissionData = {
-      submission_id: crypto.randomUUID(),
-      website_source: "RingVisit",
-      form_type: "partner_inquiry",
+    // Split name into first and last
+    const nameParts = data.yourName.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    
+    // Prepare webhook payload for n8n
+    const webhookPayload = {
+      formType: "Partner",
       timestamp: new Date().toISOString(),
-      user_data: {
+      source: "RingVisit",
+      data: {
         name: data.yourName,
+        firstName: firstName,
+        lastName: lastName,
         email: data.email,
         phone: data.phone,
         company: data.organizationName,
-        title_role: data.titleRole,
-        organization_type: data.organizationType,
-        potential_users: data.potentialUsers,
-        message: data.partnershipInterest,
-      },
-      metadata: {
-        user_agent: navigator.userAgent,
-        referrer: document.referrer,
-      },
+        titleRole: data.titleRole,
+        organizationType: data.organizationType,
+        potentialUsers: data.potentialUsers,
+        partnershipInterest: data.partnershipInterest,
+        source: "OneTriage Marketing Website"
+      }
     };
 
-    // API calling commented out
+    // Send to n8n webhook
+    try {
+      const webhookResponse = await fetch(CONFIG.WEBHOOKS.PARTNER_FORM, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload),
+      });
+      console.log("Webhook response:", webhookResponse.status);
+    } catch (error) {
+      console.error('Webhook error (non-blocking):', error);
+    }
+
+    // API endpoint call commented out
     // try {
-    //   const response = await fetch(CONFIG.WEBHOOKS.PARTNER_FORM, {
+    //   const apiResponse = await fetch(CONFIG.API_ENDPOINTS.PARTNER_SUBMIT, {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
     //     body: JSON.stringify(submissionData),
     //   });
-    //   if (!response.ok) throw new Error('Submission failed');
+    //   if (!apiResponse.ok) throw new Error('API submission failed');
     // } catch (error) {
     //   console.error('API Error:', error);
     // }
     
-    console.log("Partner inquiry data:", submissionData);
+    console.log("Partner inquiry data:", webhookPayload);
     
     toast.success("Thank you for your interest!", {
       description: "Our partnership team will contact you within 2 business days.",
