@@ -54,11 +54,14 @@ export default {
         "gradient-primary": "var(--gradient-primary)",
         "gradient-hero": "var(--gradient-hero)",
         "gradient-card": "var(--gradient-card)",
+        "gradient-overlay": "var(--gradient-overlay)",
+        "gradient-accent": "var(--gradient-accent)",
       },
       boxShadow: {
         "sm": "var(--shadow-sm)",
         "md": "var(--shadow-md)",
         "lg": "var(--shadow-lg)",
+        "xl": "var(--shadow-xl)",
         "glow": "var(--shadow-glow)",
       },
       borderRadius: {

@@ -232,7 +232,7 @@ const Contact = () => {
 
                   <Button 
                     type="submit" 
-                    variant="hero" 
+                    variant="secondary" 
                     size="lg" 
                     className="w-full"
                     disabled={isSubmitting}

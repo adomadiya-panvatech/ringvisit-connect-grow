@@ -46,7 +46,7 @@ const Header = () => {
         {/* CTA Button */}
         <div className="hidden md:block">
           <Link to="/contact">
-            <Button variant="hero" size="lg">
+            <Button variant="secondary" size="lg">
               Request Demo
             </Button>
           </Link>
@@ -79,7 +79,7 @@ const Header = () => {
               </Link>
             ))}
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="hero" size="lg" className="w-full">
+              <Button variant="secondary" size="lg" className="w-full">
                 Request Demo
               </Button>
             </Link>

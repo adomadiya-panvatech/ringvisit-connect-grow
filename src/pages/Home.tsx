@@ -7,148 +7,216 @@ import doctorImage from "@/assets/doctor-professional.jpg";
 import teamImage from "@/assets/team-collaboration.jpg";
 import patientImage from "@/assets/patient-consultation.jpg";
 import { 
-  Video, 
   Shield, 
-  Clock, 
-  Users, 
-  CheckCircle, 
-  TrendingUp,
-  Heart,
-  Zap
+  Zap,
+  Network,
+  Lock,
+  Brain,
+  RefreshCw,
+  CheckCircle,
+  ArrowRight,
+  Building2,
+  Users,
+  Wallet
 } from "lucide-react";
 
 const Home = () => {
-  const features = [
+  const ringFeatures = [
     {
-      icon: Video,
-      title: "HD Video Consultations",
-      description: "Crystal-clear video and audio quality for seamless patient-provider communication.",
-      image: patientImage
+      icon: Building2,
+      title: "Hospital Systems",
+      description: "Seamless integration with EHR and hospital infrastructure",
+      color: "from-blue-500 to-cyan-500"
     },
     {
-      icon: Shield,
-      title: "HIPAA Compliant Security",
-      description: "Enterprise-grade encryption and security measures to protect patient data.",
-      image: doctorImage
-    },
-    {
-      icon: Clock,
-      title: "24/7 Availability",
-      description: "Enable round-the-clock patient care with flexible scheduling and instant access.",
-      image: teamImage
+      icon: Wallet,
+      title: "Payers",
+      description: "Real-time claims processing and authorization",
+      color: "from-purple-500 to-pink-500"
     },
     {
       icon: Users,
-      title: "Easy Patient Onboarding",
-      description: "Simple, intuitive interface that patients can use without technical expertise.",
+      title: "Patients",
+      description: "Intuitive access to care and health information",
+      color: "from-amber-500 to-orange-500"
+    }
+  ];
+
+  const aiFeatures = [
+    {
+      icon: Brain,
+      title: "AI-Powered Insights",
+      description: "Intelligent data analysis and predictive healthcare recommendations",
+      image: doctorImage
+    },
+    {
+      icon: Shield,
+      title: "Zero-Trust Security",
+      description: "Military-grade encryption with continuous authentication across the communication ring",
+      image: patientImage
+    },
+    {
+      icon: RefreshCw,
+      title: "Real-Time Synchronization",
+      description: "Instant data flow between all stakeholders with complete audit trails",
+      image: teamImage
+    },
+    {
+      icon: Network,
+      title: "Unified Network",
+      description: "One platform connecting hospitals, payers, and patients in a secure ecosystem",
       image: heroImage
     }
   ];
 
   const benefits = [
-    { icon: TrendingUp, title: "Increase Revenue", description: "Expand your practice reach and serve more patients" },
-    { icon: Heart, title: "Better Patient Outcomes", description: "Improve care continuity and patient satisfaction" },
-    { icon: Zap, title: "Save Time", description: "Reduce no-shows and streamline workflow efficiency" },
-    { icon: CheckCircle, title: "Quick Implementation", description: "Get started in days, not months" }
-  ];
-
-  const steps = [
-    { number: "1", title: "Schedule Demo", description: "Connect with our team to see RingVisit in action" },
-    { number: "2", title: "Customize Setup", description: "We tailor the platform to your practice needs" },
-    { number: "3", title: "Train Your Team", description: "Comprehensive onboarding and support included" },
-    { number: "4", title: "Start Treating", description: "Begin seeing patients virtually within days" }
+    { 
+      stat: "95%", 
+      label: "Reduction in claim processing time",
+      icon: Zap
+    },
+    { 
+      stat: "40%", 
+      label: "Decrease in administrative costs",
+      icon: CheckCircle
+    },
+    { 
+      stat: "99.9%", 
+      label: "Platform uptime & reliability",
+      icon: Shield
+    },
+    { 
+      stat: "100%", 
+      label: "HIPAA & SOC 2 compliant",
+      icon: Lock
+    }
   ];
 
   return (
     <Layout
-      title="RingVisit - Transform Healthcare with Telehealth Solutions"
-      description="Join thousands of healthcare providers using RingVisit's secure, HIPAA-compliant telehealth platform. Improve patient care, increase efficiency, and expand your practice."
-      keywords="telehealth software, telemedicine platform, virtual healthcare, HIPAA compliant, patient care technology"
+      title="RingVisit - AI-Powered Secure Healthcare Communication Platform"
+      description="Connect hospital systems, payers, and patients in one secure AI-powered communication ring. Transform healthcare delivery with real-time data synchronization and zero-trust security."
+      keywords="AI healthcare platform, hospital communication system, secure medical data exchange, telehealth, HIPAA compliant"
     >
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="space-y-6 animate-fade-in">
-              <h1 className="text-4xl font-bold leading-tight text-foreground lg:text-5xl xl:text-6xl">
-                Transform Healthcare with{" "}
-                <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  Modern Telehealth
-                </span>
-              </h1>
-              <p className="text-lg text-muted-foreground lg:text-xl">
-                Deliver exceptional patient care from anywhere. RingVisit provides secure, 
-                HIPAA-compliant virtual consultations that improve outcomes and streamline your practice.
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link to="/contact">
-                  <Button variant="hero" size="lg" className="w-full sm:w-auto text-base">
-                    Request a Demo
-                  </Button>
-                </Link>
-                <Link to="/partner">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-base">
-                    Become a Partner
-                  </Button>
-                </Link>
-              </div>
-              <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-accent" />
-                  <span>HIPAA Compliant</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-accent" />
-                  <span>24/7 Support</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-accent" />
-                  <span>Easy Setup</span>
-                </div>
-              </div>
-            </div>
-            <div className="animate-scale-in">
-              <img 
-                src={heroImage} 
-                alt="Healthcare professional using RingVisit telehealth platform on tablet in modern medical office"
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
-          </div>
+      {/* Hero Section - Full Screen */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Modern healthcare technology interface"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-overlay" />
         </div>
-      </section>
 
-      {/* Social Proof Section */}
-      <section className="border-y border-border bg-background py-8">
-        <div className="container mx-auto px-4">
-          <p className="text-center text-base font-medium text-muted-foreground">
-            Trusted by thousands of healthcare providers nationwide
-          </p>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground lg:text-4xl">
-              Why Healthcare Providers Choose RingVisit
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Everything you need to deliver world-class virtual care
+        {/* Content */}
+        <div className="container relative z-10 mx-auto px-4 py-20">
+          <div className="max-w-4xl">
+            <div className="mb-6 inline-block animate-fade-in">
+              <span className="text-secondary text-sm font-medium tracking-wider uppercase">
+                AI-Powered Healthcare Communication
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 leading-[1.1] animate-slide-up">
+              The Art of Secure<br />
+              Healthcare Connection
+            </h1>
+            
+            <p className="text-lg md:text-xl text-white/90 mb-12 max-w-2xl leading-relaxed animate-fade-in">
+              Creating seamless communication rings between hospital systems, payers, and patients. 
+              Where AI intelligence meets zero-trust security.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
+              <Link to="/contact">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="group text-base font-semibold px-8 py-6 h-auto"
+                >
+                  Schedule Demo
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/partner">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-base font-semibold px-8 py-6 h-auto border-2 border-white text-white hover:bg-white hover:text-primary"
+                >
+                  Become a Partner
+                </Button>
+              </Link>
+            </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+            <div className="w-1 h-3 bg-white/50 rounded-full" />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="bg-primary py-12 border-b border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <Card key={index} className="group border-2 transition-all duration-300 hover:border-primary hover:shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary/20">
-                      <Icon className="h-7 w-7 text-primary" />
+                <div key={index} className="text-center">
+                  <div className="flex items-center justify-center mb-3">
+                    <Icon className="h-6 w-6 text-secondary mr-2" />
+                    <div className="text-4xl md:text-5xl font-bold text-white">
+                      {benefit.stat}
                     </div>
-                    <h3 className="mb-2 text-xl font-semibold">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  </div>
+                  <p className="text-sm text-white/80">{benefit.label}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* The Ring Concept */}
+      <section className="py-32 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mb-20">
+            <span className="text-accent text-sm font-medium tracking-wider uppercase mb-4 block">
+              The RingVisit Ecosystem
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+              One Secure Ring.<br />
+              Three Connected Worlds.
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Our AI-powered platform creates an unbreakable communication ring, 
+              seamlessly connecting hospital systems, payers, and patients in real-time.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {ringFeatures.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card 
+                  key={index} 
+                  className="group border-0 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-8">
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                      <Icon className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               );
@@ -157,39 +225,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="bg-muted/30 py-20">
+      {/* AI Features - Alternating Layout */}
+      <section className="py-32">
         <div className="container mx-auto px-4">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground lg:text-4xl">
-              Powerful Features for Modern Healthcare
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Advanced technology designed for healthcare professionals
-            </p>
-          </div>
-          <div className="space-y-24">
-            {features.map((feature, index) => {
+          <div className="space-y-32">
+            {aiFeatures.map((feature, index) => {
               const Icon = feature.icon;
               const isEven = index % 2 === 0;
               return (
                 <div 
                   key={index} 
-                  className={`grid items-center gap-12 lg:grid-cols-2 ${!isEven && "lg:grid-flow-dense"}`}
+                  className={`grid lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}
                 >
-                  <div className={`space-y-6 ${!isEven && "lg:col-start-2"}`}>
-                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                      <Icon className="h-8 w-8 text-primary" />
+                  <div className={`space-y-6 ${!isEven ? 'lg:col-start-2' : ''}`}>
+                    <div className="inline-flex p-4 rounded-2xl bg-accent/10">
+                      <Icon className="h-10 w-10 text-accent" />
                     </div>
-                    <h3 className="text-2xl font-bold lg:text-3xl">{feature.title}</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">{feature.description}</p>
+                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                      {feature.title}
+                    </h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                    <Link to="/contact">
+                      <Button variant="outline" size="lg" className="group mt-4">
+                        Learn More
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
                   </div>
-                  <div className={!isEven ? "lg:col-start-1 lg:row-start-1" : ""}>
-                    <img 
-                      src={feature.image} 
-                      alt={`${feature.title} - RingVisit telehealth feature`}
-                      className="rounded-2xl shadow-xl"
-                    />
+                  <div className={!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-accent rounded-3xl opacity-20 blur-3xl" />
+                      <img 
+                        src={feature.image} 
+                        alt={feature.title}
+                        className="relative rounded-3xl shadow-xl w-full"
+                      />
+                    </div>
                   </div>
                 </div>
               );
@@ -198,76 +271,90 @@ const Home = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="bg-muted/30 py-20">
+      {/* Integration Section */}
+      <section className="py-32 bg-primary text-white overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground lg:text-4xl">
-              Get Started in 4 Simple Steps
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="text-secondary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Seamless Integration
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+              Built for Healthcare.<br />
+              Designed for Tomorrow.
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              From consultation to treating patients in days, not months
+            <p className="text-lg text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
+              Enterprise-grade infrastructure that integrates with existing systems while 
+              preparing you for the future of healthcare communication.
             </p>
-          </div>
-          
-          {/* Desktop Steps with Connecting Lines */}
-          <div className="hidden lg:block">
-            <div className="relative mx-auto max-w-5xl">
-              {/* Connecting Line */}
-              <div className="absolute left-0 right-0 top-12 h-1 bg-gradient-to-r from-primary via-primary to-primary" 
-                   style={{ width: 'calc(100% - 12rem)', marginLeft: '6rem' }} />
-              
-              <div className="relative grid grid-cols-4 gap-8">
-                {steps.map((step, index) => (
-                  <div key={index} className="relative text-center">
-                    <div className="relative z-10 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary text-3xl font-bold text-primary-foreground shadow-lg ring-4 ring-background">
-                      {step.number}
-                    </div>
-                    <h3 className="mb-3 text-xl font-semibold">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.description}</p>
-                  </div>
-                ))}
+            
+            <div className="grid md:grid-cols-3 gap-8 text-left">
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
+                <CheckCircle className="h-8 w-8 text-secondary mb-4" />
+                <h4 className="text-xl font-bold mb-2">Epic & Cerner Ready</h4>
+                <p className="text-white/70">Direct integration with major EHR systems</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
+                <CheckCircle className="h-8 w-8 text-secondary mb-4" />
+                <h4 className="text-xl font-bold mb-2">FHIR Compliant</h4>
+                <p className="text-white/70">Modern healthcare data standards</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
+                <CheckCircle className="h-8 w-8 text-secondary mb-4" />
+                <h4 className="text-xl font-bold mb-2">API-First Architecture</h4>
+                <p className="text-white/70">Flexible integration capabilities</p>
               </div>
             </div>
-          </div>
-
-          {/* Mobile/Tablet Steps */}
-          <div className="grid gap-8 lg:hidden md:grid-cols-2">
-            {steps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground shadow-lg">
-                  {step.number}
-                </div>
-                <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="bg-gradient-primary py-20 text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
-            Ready to Transform Your Practice?
-          </h2>
-          <p className="mx-auto mb-10 max-w-2xl text-lg opacity-95">
-            Join thousands of healthcare providers delivering exceptional care with RingVisit. 
-            Schedule your personalized demo today.
-          </p>
-          <Link to="/contact">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-2 border-white bg-white text-primary hover:bg-white/90 text-base font-semibold"
-            >
-              Schedule Your Demo Now
-            </Button>
-          </Link>
-          <div className="mt-10 flex items-center justify-center gap-2 text-sm opacity-90">
-            <Shield className="h-5 w-5" />
-            <p>Secure & Confidential | HIPAA Compliant | Enterprise-Grade Security</p>
+      {/* Final CTA */}
+      <section className="py-32 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+              Transform Your<br />
+              Healthcare Ecosystem
+            </h2>
+            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+              Join leading healthcare organizations building the future of secure, 
+              AI-powered patient care.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
+                <Button 
+                  size="lg" 
+                  className="group text-base font-semibold px-8 py-6 h-auto bg-primary hover:bg-primary-light"
+                >
+                  Get Started Today
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/partner">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-base font-semibold px-8 py-6 h-auto border-2"
+                >
+                  View Partnerships
+                </Button>
+              </Link>
+            </div>
+            
+            <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-accent" />
+                <span>HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Lock className="h-5 w-5 text-accent" />
+                <span>SOC 2 Certified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-accent" />
+                <span>24/7 Support</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
