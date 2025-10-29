@@ -209,7 +209,7 @@ const Accessibility = () => {
                 </p>
                 <p className="mb-2">
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:support@panvatech.com" className="text-primary hover:underline">
+                  <a className="text-primary">
                     support@panvatech.com
                   </a>
                 </p>

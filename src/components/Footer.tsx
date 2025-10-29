@@ -77,7 +77,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start space-x-2">
                 <Mail className="h-4 w-4 mt-0.5 text-primary" />
-                <a href="mailto:support@panvatech.com" className="text-muted-foreground hover:text-primary transition-colors">
+                <a className="text-muted-foreground transition-colors">
                   support@panvatech.com
                 </a>
               </li>

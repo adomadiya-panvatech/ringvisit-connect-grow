@@ -158,7 +158,7 @@ const Privacy = () => {
               </ul>
               <p className="mt-4 text-muted-foreground">
                 To exercise these rights, please contact us at{" "}
-                <a href="mailto:support@panvatech.com" className="text-primary hover:underline">
+                <a  className="text-primary">
                   support@panvatech.com
                 </a>
               </p>
@@ -209,7 +209,7 @@ const Privacy = () => {
               <div className="rounded-lg bg-muted/50 p-6">
                 <p className="mb-2">
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:support@panvatech.com" className="text-primary hover:underline">
+                  <a className="text-primary">
                     support@panvatech.com
                   </a>
                 </p>
