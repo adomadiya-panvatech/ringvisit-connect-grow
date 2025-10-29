@@ -372,7 +372,7 @@ const Partner = () => {
                         <SelectContent className="bg-background z-50">
                           <SelectItem value="morning">Morning (9 AM - 12 PM)</SelectItem>
                           <SelectItem value="afternoon">Afternoon (12 PM - 5 PM)</SelectItem>
-                          <SelectItem value="evening">Evening (5 PM - 8 PM)</SelectItem>
+                          <SelectItem value="evening">Evening (5 PM to 6 PM)</SelectItem>
                           <SelectItem value="anytime">Anytime</SelectItem>
                         </SelectContent>
                       </Select>
