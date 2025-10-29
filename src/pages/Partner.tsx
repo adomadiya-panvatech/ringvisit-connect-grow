@@ -18,6 +18,8 @@ const partnerSchema = z.object({
   titleRole: z.string().trim().min(1, "Title/Role is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
   phone: z.string().trim().min(10, "Valid phone number is required").max(20),
+  preferredContactMethod: z.string().optional(),
+  bestTimeToContact: z.string().optional(),
   organizationType: z.string().min(1, "Please select an organization type"),
   potentialUsers: z.string().min(1, "Please select potential users range"),
   partnershipInterest: z.string().trim().min(10, "Partnership interest must be at least 10 characters").max(1000),
@@ -53,10 +55,12 @@ const Partner = () => {
         phone: data.phone,
         company: data.organizationName,
         titleRole: data.titleRole,
+        preferredContactMethod: data.preferredContactMethod || "",
+        bestTimeToContact: data.bestTimeToContact || "",
         organizationType: data.organizationType,
         potentialUsers: data.potentialUsers,
         partnershipInterest: data.partnershipInterest,
-        source: "OneTriage Marketing Website"
+        source: `${CONFIG.COMPANY.NAME} Marketing Website`
       }
     };
 
@@ -333,6 +337,47 @@ const Partner = () => {
                       />
                       {errors.phone && (
                         <p className="mt-1 text-sm text-destructive">{errors.phone.message}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <label htmlFor="preferredContactMethod" className="mb-2 block text-sm font-medium">
+                        Preferred Contact Method
+                      </label>
+                      <Select onValueChange={(value) => setValue("preferredContactMethod", value)}>
+                        <SelectTrigger className={errors.preferredContactMethod ? "border-destructive" : ""}>
+                          <SelectValue placeholder="Select preferred method" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="email">Email</SelectItem>
+                          <SelectItem value="phone">Phone</SelectItem>
+                          <SelectItem value="microsoft_teams">Microsoft Teams</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {errors.preferredContactMethod && (
+                        <p className="mt-1 text-sm text-destructive">{errors.preferredContactMethod.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="bestTimeToContact" className="mb-2 block text-sm font-medium">
+                        Best Time to Contact
+                      </label>
+                      <Select onValueChange={(value) => setValue("bestTimeToContact", value)}>
+                        <SelectTrigger className={errors.bestTimeToContact ? "border-destructive" : ""}>
+                          <SelectValue placeholder="Select best time" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="morning">Morning (9 AM - 12 PM)</SelectItem>
+                          <SelectItem value="afternoon">Afternoon (12 PM - 5 PM)</SelectItem>
+                          <SelectItem value="evening">Evening (5 PM - 8 PM)</SelectItem>
+                          <SelectItem value="anytime">Anytime</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {errors.bestTimeToContact && (
+                        <p className="mt-1 text-sm text-destructive">{errors.bestTimeToContact.message}</p>
                       )}
                     </div>
                   </div>
